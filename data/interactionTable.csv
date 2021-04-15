@@ -1,9 +1,9 @@
 CurrentState,KeyTyped,KeyCode,MouseEvent,ClickableName,MapDirection,NextState
-Start,,,mouseReleased,,,
-room1,,,mouseReleased,,,
-room2,,,,,E,room1
-room3,,,,,W,room2
-room4,,,,,E,room3
-room5,,,,,N,room4
-room6,,,,,W,room5
-,,,,,E,room6
+splash ,,,,,,introduction
+introduction,,,,,E,room1
+room1,,,,,W,room2
+room2,,,,,S,room3
+room3,,,,,N,room4
+room4,,,,,W,room5
+room5,,,,,E,room6
+room6,,,,,,room1

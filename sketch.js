@@ -2,8 +2,7 @@
   AMAZON SURREALISM 
   by Courtney Crother
   
-  This is a game
-  im sorry ? 
+  This is a game- To win catch the bernie sprite. You lose when Jeff Bezos catches you 
 ***********************************************************************************/
 
 // adventure manager global  
@@ -24,8 +23,6 @@ const playGameIndex = 0;
 function preload() {
   clickablesManager = new ClickableManager('data/clickableLayout.csv');
   adventureManager = new AdventureManager('data/adventureStates.csv', 'data/interactionTable.csv', 'data/clickableLayout.csv');
-  chase_image = loadImage('assets/avatars/chase 1.png'); 
-  chase_image_2 = loadImage('assets/avatars/chase 2.png'); 
 }
 
 // Setup the adventure manager
@@ -36,13 +33,10 @@ function setup() {
   clickables = clickablesManager.setup();
 
   // create a sprite and add the 3 animations
-  playerSprite = createSprite(158, 122, 80, 80);
+  playerSprite = createSprite(width/2, height/2, 80, 80);
 
   // every animation needs a descriptor, since we aren't switching animations, this string value doesn't matter
-  chase_image.resize(158,122); 
-  chase_image_2.resize(158,122); 
-  playerSprite.addAnimation('right', chase_image, chase_image);
-  playerSprite.addAnimation('left', chase_image_2, chase_image_2);
+   playerSprite.addAnimation('regular', loadAnimation('assets/avatars/sprite1.png', 'assets/avatars/sprite4.png'));
   
 
   // use this to track movement from toom to room in adventureManager.draw()
@@ -103,14 +97,10 @@ function mouseReleased() {
 
 //-------------- YOUR SPRITE MOVEMENT CODE HERE  ---------------//
 function moveSprite() {
-  if(keyIsDown(RIGHT_ARROW)) {
+  if(keyIsDown(RIGHT_ARROW))
     playerSprite.velocity.x = 10;
-    playerSprite.changeAnimation('right');
-  }
-  else if(keyIsDown(LEFT_ARROW)){
-    playerSprite.changeAnimation('left'); 
+  else if(keyIsDown(LEFT_ARROW))
     playerSprite.velocity.x = -10;
-  }
   else
     playerSprite.velocity.x = 0;
 
