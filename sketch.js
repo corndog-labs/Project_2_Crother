@@ -23,6 +23,7 @@ const playGameIndex = 0;
 function preload() {
   clickablesManager = new ClickableManager('data/clickableLayout.csv');
   adventureManager = new AdventureManager('data/adventureStates.csv', 'data/interactionTable.csv', 'data/clickableLayout.csv');
+  //add sound 
 }
 
 // Setup the adventure manager
@@ -63,8 +64,8 @@ function draw() {
   clickablesManager.draw();
 
   // No avatar for Splash screen or Instructions screen
-  if( adventureManager.getStateName() !== "Start" && 
-      adventureManager.getStateName() !== "Instruction" ) {
+  if( adventureManager.getStateName() !== "splash" && 
+      adventureManager.getStateName() !== "introduction" ) {
       
     // responds to keydowns
     moveSprite();
