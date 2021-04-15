@@ -1,5 +1,5 @@
 CurrentState,KeyTyped,KeyCode,MouseEvent,ClickableName,MapDirection,NextState
-splash ,,,mouseReleased,,,introduction
+splash,,,mouseReleased,,,introduction
 introduction,,,mouseReleased,,,room1
 room1,,,,,S,room2
 room2,,,,,E,room3
