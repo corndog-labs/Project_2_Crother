@@ -22,7 +22,6 @@ var clickables;           // an array of clickable objects
 const playGameIndex = 0;
 
 var numLives = 0;
-
 var orangeBlossom;
 
 
@@ -47,7 +46,6 @@ function setup() {
   // every animation needs a descriptor, since we aren't switching animations, this string value doesn't matter
    playerSprite.addAnimation('regular', loadAnimation('assets/avatars/sprite1.png', 'assets/avatars/sprite4.png'));
   
-
   // use this to track movement from toom to room in adventureManager.draw()
   adventureManager.setPlayerSprite(playerSprite);
 
@@ -94,9 +92,6 @@ function keyPressed() {
     return;
   }
 
-    // dispatch key events for adventure manager to move from state to 
-  // state or do special actions - this can be disabled for NPC conversations
-  // or text entry   
 
   // dispatch to elsewhere
   adventureManager.keyPressed(key); 
@@ -195,6 +190,8 @@ class InstructionsScreen extends PNGRoom {
     this.instructionsText = "You are navigating through the interior space of your moods. There is no goal to this game, but just a chance to explore various things that might be going on in your head. Use the ARROW keys to navigate your avatar around.";
   }
   }
+  
+  //NPCs in the rooms 
 
 class Bezoroom8 extends PNGRoom {
 
