@@ -2,9 +2,9 @@
   AMAZON SURREALISM 
   by Courtney Crother
   
-  This is a game- To win catch the bernie sprite. You lose when Jeff Bezos catches you
+ In this game - To win find the bernie sprite. The game restarts if you run into Jeff.
 
-  Sound does not play on chrome 
+The sound does not play on chrome 
 ***********************************************************************************/
 
 // adventure manager global  
@@ -21,7 +21,7 @@ var clickables;           // an array of clickable objects
 // indexes into the clickable array (constants)
 const playGameIndex = 0;
 
-var numLives = 5;
+var numLives = 0;
 
 var orangeBlossom;
 
@@ -94,8 +94,7 @@ function keyPressed() {
     return;
   }
 
-  
-  // dispatch key events for adventure manager to move from state to 
+    // dispatch key events for adventure manager to move from state to 
   // state or do special actions - this can be disabled for NPC conversations
   // or text entry   
 
@@ -159,10 +158,20 @@ clickableButtonPressed = function() {
 function die() {
   numLives--;
   if( numLives > 0 )  {
-    adventureManager.changeState("Home");
+    adventureManager.changeState("room1");
   }
   else {
-    adventureManager.changeState("Home");
+    adventureManager.changeState("room1");
+  }
+}
+
+function win() {
+  numLives--;
+  if( numLives > 0 )  {
+    adventureManager.changeState("room10");
+  }
+  else {
+    adventureManager.changeState("room10");
   }
 }
 
@@ -198,7 +207,7 @@ preload() {
     this.NPCgroup = new Group;
 
     // change this number for more or less
-    this.numNPCs = 10;
+    this.numNPCs = 5;
 
     // is an array of sprites, note we keep this array because
     // later I will add movement to all of them
@@ -253,7 +262,7 @@ preload() {
     this.NPCgroup = new Group;
 
     // change this number for more or less
-    this.numNPCs = 10;
+    this.numNPCs = 8;
 
     // is an array of sprites, note we keep this array because
     // later I will add movement to all of them
@@ -296,23 +305,172 @@ preload() {
     }
   }
 }
+
+class Bezoroom7 extends PNGRoom {
+
+preload() {
+     // load the animation just one time
+    this.NPCAnimation = loadAnimation('assets/NPCs/bezos1.png', 'assets/NPCs/bezos4.png');
+    
+    // this is a type from p5play, so we can do operations on all sprites
+    // at once
+    this.NPCgroup = new Group;
+
+    // change this number for more or less
+    this.numNPCs = 12;
+
+    // is an array of sprites, note we keep this array because
+    // later I will add movement to all of them
+    this.NPCSprites = [];
+
+    // this will place them randomly in the room
+    for( let i = 0; i < this.numNPCs; i++ ) {
+      // random x and random y poisiton for each sprite
+      let randX  = random(100, width-100);
+      let randY = random(100, height-100);
+
+      // create the sprite
+      this.NPCSprites[i] = createSprite( randX, randY, 40, 40);
+    
+      // add the animation to it (important to load the animation just one time)
+      this.NPCSprites[i].addAnimation('regular', this.NPCAnimation );
+
+      // add to the group
+      this.NPCgroup.add(this.NPCSprites[i]);
+    }
+
+    print("DeepThoughtsRoom");
+  }
+
+  draw() {
+    super.draw();
+
+
+    this.NPCgroup.draw();
+
+    // checks for overlap with ANY sprite in the group, if this happens
+    // our die() function gets called
+    playerSprite.overlap(this.NPCgroup, die);
+
+    for( let i = 0; i < this.NPCSprites.length; i++ ) {
+      this.NPCSprites[i].velocity.x = random(-1,1);
+      this.NPCSprites[i].velocity.y = random(-1,1);
+    
+
+    }
+  }
+}
+
+class Bernieroom9 extends PNGRoom {
+
+preload() {
+     // load the animation just one time
+    this.NPCAnimation = loadAnimation('assets/NPCs/bernie1.png', 'assets/NPCs/bernie4.png');
+    
+    // this is a type from p5play, so we can do operations on all sprites
+    // at once
+    this.NPCgroup = new Group;
+
+    // change this number for more or less
+    this.numNPCs = 1;
+
+    // is an array of sprites, note we keep this array because
+    // later I will add movement to all of them
+    this.NPCSprites = [];
+
+    // this will place them randomly in the room
+    for( let i = 0; i < this.numNPCs; i++ ) {
+      // random x and random y poisiton for each sprite
+      let randX  = random(100, width-100);
+      let randY = random(100, height-100);
+
+      // create the sprite
+      this.NPCSprites[i] = createSprite( randX, randY, 40, 40);
+    
+      // add the animation to it (important to load the animation just one time)
+      this.NPCSprites[i].addAnimation('regular', this.NPCAnimation );
+
+      // add to the group
+      this.NPCgroup.add(this.NPCSprites[i]);
+    }
+
+    print("DeepThoughtsRoom");
+  }
+
+  draw() {
+    super.draw();
+
+
+    this.NPCgroup.draw();
+
+    // checks for overlap with ANY sprite in the group, if this happens
+    // our die() function gets called
+    playerSprite.overlap(this.NPCgroup, win);
+
+    for( let i = 0; i < this.NPCSprites.length; i++ ) {
+      this.NPCSprites[i].velocity.x = random(-1,1);
+      this.NPCSprites[i].velocity.y = random(-1,1);
+    
+
+    }
+  }
+}
+
+class Bernieroom3 extends PNGRoom {
+
+preload() {
+     // load the animation just one time
+    this.NPCAnimation = loadAnimation('assets/NPCs/bernie1.png', 'assets/NPCs/bernie4.png');
+    
+    // this is a type from p5play, so we can do operations on all sprites
+    // at once
+    this.NPCgroup = new Group;
+
+    // change this number for more or less
+    this.numNPCs = 1;
+
+    // is an array of sprites, note we keep this array because
+    // later I will add movement to all of them
+    this.NPCSprites = [];
+
+    // this will place them randomly in the room
+    for( let i = 0; i < this.numNPCs; i++ ) {
+      // random x and random y poisiton for each sprite
+      let randX  = random(100, width-100);
+      let randY = random(100, height-100);
+
+      // create the sprite
+      this.NPCSprites[i] = createSprite( randX, randY, 40, 40);
+    
+      // add the animation to it (important to load the animation just one time)
+      this.NPCSprites[i].addAnimation('regular', this.NPCAnimation );
+
+      // add to the group
+      this.NPCgroup.add(this.NPCSprites[i]);
+    }
+
+    print("DeepThoughtsRoom");
+  }
+
+  draw() {
+    super.draw();
+
+
+    this.NPCgroup.draw();
+
+    // checks for overlap with ANY sprite in the group, if this happens
+    // our die() function gets called
+    playerSprite.overlap(this.NPCgroup, win);
+
+    for( let i = 0; i < this.NPCSprites.length; i++ ) {
+      this.NPCSprites[i].velocity.x = random(-1,1);
+      this.NPCSprites[i].velocity.y = random(-1,1);
+    
+
+    }
+  }
+}
  
-  // call the PNGRoom superclass's draw function to draw the background image
-  // and draw our instructions on top of this
-  // draw(){
-  //   // tint down background image so text is more readable
-  //   tint(128);
-      
-  //   // this calls PNGRoom.draw()
-  //   super.draw();
-      
-  //   // text draw settings
-  //   fill(255);
-  //   textAlign(CENTER);
-  //   textSize(30);
 
-  //   // Draw text in a box
-  //   text(this.instructionsText, width/6, height/6, this.textBoxWidth, this.textBoxHeight );
-  // }
-
-
+ 
+  
